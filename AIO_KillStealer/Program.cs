@@ -16,7 +16,7 @@ namespace AIO_KillStealer
         private static bool _killError = false;
         private static bool _killStealEnabled;
         private static bool _activ = true;
-        
+
         private static Player _player;
         private static Hero _me;
         private static void Main(string[] args)
@@ -270,15 +270,15 @@ namespace AIO_KillStealer
                     HeroSpellDictionary.Remove(enemy);
 
                     damageNeeded = enemy.Health - damageDone + spellCastPoint * enemy.HealthRegeneration + MorphMustDie(enemy, spellCastPoint);
-                    
+
                     HeroDamageDictionary.Add(enemy, damageNeeded);
                     HeroSpellDictionary.Add(enemy, ability.Name);
                 }
-                    
+
                 if (me.IsChanneling()) continue;
 
                 if (!(damageNeeded < 0) || !(me.Distance2D(enemy) < spellRange || killType.Equals("global")) || !MeCanSurvive(enemy, me, ability, damageDone)) continue;
-                
+
                 switch (spellTargetType)
                 {
                     case 1:
@@ -496,14 +496,14 @@ namespace AIO_KillStealer
             return 0;
         }
 
-        
+
         private static void Game_OnWndProc(WndEventArgs args)
         {
-            if (!Game.IsInGame || args.Msg != (ulong)Utils.WindowsMessages.WM_KEYUP || args.WParam != 'D' || Game.IsChatOpen)
+            if (!Game.IsInGame || args.Msg != (ulong)Utils.WindowsMessages.WM_KEYUP || args.WParam != 'Z' || Game.IsChatOpen)
                 return;
             _activ = !_activ;
         }
-        
+
         private static void Game_OnDraw(EventArgs args)
         {
             if (!Game.IsInGame || _player == null || _me == null || !_activ)
